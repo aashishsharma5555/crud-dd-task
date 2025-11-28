@@ -31,14 +31,14 @@ jobs:
       # 1. Backend Image Build and Push
       - name: Build and Push Backend Image
         run: |
-          docker build -t $REPO_NAME/mean-backend:latest ./backend
-          docker push $REPO_NAME/mean-backend:latest
+          docker build -t $REPO_NAME/backend:latest ./backend
+          docker push $REPO_NAME/backend:latest
 
       # 2. Frontend Image Build and Push
       - name: Build and Push Frontend Image
         run: |
-          docker build -t $REPO_NAME/mean-frontend:latest ./frontend
-          docker push $REPO_NAME/mean-frontend:latest
+          docker build -t $REPO_NAME/frontend:latest ./frontend
+          docker push $REPO_NAME/frontend:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,7 +52,4 @@ jobs:
           key: ${{ env.SSH_KEY }}
           
           script: |
-            # Docker Hub से नवीनतम images खींचें
-            docker compose pull
-            # कंटेनरों को रीस्टार्ट करें और नवीनतम images का उपयोग करें
-            docker compose up -d --no-deps backend frontend nginx
+            
